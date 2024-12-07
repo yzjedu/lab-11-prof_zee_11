@@ -37,7 +37,7 @@ def read_morse_code_dictionary(filename):
 
 # Purpose: Read the Morse code text file to decode.
 # Parameters: filename (string) - The file containing Morse code.
-# Returns: A list of Morse code lines.
+# Returns: A table of Morse code lists.
 def read_morse_code_file(filename):
     table = []
     with open(filename, 'r') as file:
@@ -46,9 +46,9 @@ def read_morse_code_file(filename):
         return table
 
 # Purpose: Decode a line of Morse code using the dictionary.
-# Parameters: row (list) - A line of Morse code, morse_dict (dictionary).
+# Parameters: row (list) - A list of Morse code, morse_dict (dictionary).
 # Returns: The decoded English string.
-def decode_morse_line(row, morse_dict):
+def decode_morse_row(row, morse_dict):
     #words = line.split(' ')  # Split the line into Morse code letters
     decoded_line = ''
     for word in row:
@@ -61,7 +61,7 @@ def decode_morse_line(row, morse_dict):
 def decode_morse_to_file(table, morse_dict, output_file):
     with open(output_file, 'w') as file:
         for row in table:
-            decoded_line = decode_morse_line(row, morse_dict)
+            decoded_line = decode_morse_row(row, morse_dict)
             file.write(decoded_line + '\n')
 
 # Purpose: Main function to drive the Morse code decoder program.
@@ -80,7 +80,7 @@ def main():
     # Step 3: Get the input Morse code file
     input_file = get_valid_filename("Enter the name of the file to decode: ")
 
-    # Step 4: Read the Morse code lines
+    # Step 4: Read the Morse code lines and create table
     table = read_morse_code_file(input_file)
 
     # Step 5: Get the output file name
